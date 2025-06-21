@@ -1,0 +1,65 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* align to top */
+  min-height: 100vh;
+  text-align: center;
+}
+
+/* optional: space below the header and search */
+#twitchy {
+  font-size: 5rem;
+  margin-bottom: 2rem;
+}
+
+.searchbar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+#searchInput {
+  padding: 1rem 1.3rem;
+  font-size: 1rem;
+}
+
+#searchButton {
+  padding: 1rem 1rem;
+  font-size: 1rem;
+}
+
+.stream {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.toggleChatButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+}
+
+.closeStreamButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  background-color: #8a2be2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.closeStreamButton:hover {
+  background-color: #6c1bbd;
+}
