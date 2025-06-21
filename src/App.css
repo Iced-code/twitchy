@@ -19,6 +19,23 @@
   margin-bottom: 2rem;
 }
 
+.switchPlatform {
+  border: none;
+  border-radius: 6px;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* color: white; */
+  background-color: #cacaca;
+  transition: background-color 0.2s ease;
+}
+
+.switchPlatform:hover {
+  background-color: #979797;
+}
+
 .searchbar {
   display: flex;
   gap: 0.5rem;
@@ -42,17 +59,17 @@
   margin-bottom: 1rem;
 }
 
-.toggleChatButton {
+.buttonRow {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
   margin-top: 1rem;
-  padding: 0.5rem 1.5rem;
-  font-size: 1rem;
 }
 
-.closeStreamButton {
+.toggleChatButton, .closeStreamButton {
   margin-top: 1rem;
   padding: 0.5rem 1.5rem;
   font-size: 1rem;
-  background-color: #8a2be2;
   color: white;
   border: none;
   border-radius: 6px;
@@ -60,6 +77,14 @@
   transition: background-color 0.2s ease;
 }
 
+.toggleChatButton {
+  background-color: #8a2be2;
+}
+
+.toggleChatButton:hover {
+  background-color: #7825c5;
+}
+
 .closeStreamButton:hover {
-  background-color: #6c1bbd;
+  background-color: #3a3a3a;
 }
