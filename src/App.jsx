@@ -27,6 +27,7 @@ function App() {
     }
   })
 
+  const parentDomain = window.location.hostname;
 
   return (
     <div className="App">
@@ -45,7 +46,7 @@ function App() {
       {submittedChannel && !closeStream && (
         <div className="stream">
           <iframe id="twitch-stream-embed"
-            src={`https://player.twitch.tv/?channel=${submittedChannel}&parent=localhost`}
+            src={`https://player.twitch.tv/?channel=${submittedChannel}&parent=${parentDomain}`}
             height="550"
             width="916"
             allowfullscreen
@@ -54,7 +55,7 @@ function App() {
 
           {showChat && !closeStream && (
             <iframe id="twitch-chat-embed"
-              src={`https://www.twitch.tv/embed/${submittedChannel}/chat?parent=localhost`}
+              src={`https://www.twitch.tv/embed/${submittedChannel}/chat?parent=${parentDomain}`}
               height="550"
               width="350"
               title="Twitch Chat">
