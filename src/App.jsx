@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 id="twitchy">Twitchy</h1>
+      <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
       <p>( Multiviewing made easy )</p>
       
       <form onSubmit={handleSubmit} className="searchbar">
