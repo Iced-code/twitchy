@@ -1,32 +1,44 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FaTwitch, FaYoutube } from 'react-icons/fa'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  
-  const [channel, setChannel] = useState("");
-  const [submittedChannel, setSubmittedChannel] = useState("");
-  /* const [submittedChannel2, setSubmittedChannel2] = useState("");
-  const [channel2, setChannel2] = useState(""); */
-
+  const [input, setInput] = useState("");
+  const [channels, setChannels] = useState([]);
   const [showChat, setShowChat] = useState(false);
-  const [closeStream, setCloseStream] = useState(false);
+  const [visibleChannels, setVisibleChannels] = useState([]);
+
   const [platform, setPlatform] = useState("twitch");
+
+  const [num, setNum] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmittedChannel(channel);
-    /* setSubmittedChannel2(channel2); */
+
+    if(input.trim() !== ""){
+      if(channels.length === 0){
+        setChannels([input]);
+        setVisibleChannels([true]);
+      }
+      else if(channels.length > 0 && input !== channels[0]){
+        if(channels.length > 1 && input !== channels[1]){
+          num === 0 ? setChannels([input, channels[1]]) : setChannels([channels[0], input]);
+          setNum(Math.abs(num + -1));
+        }
+        else {
+          setChannels([channels[0], input]);
+        }
+        setVisibleChannels([true, true]);
+      }
+    } 
+
     setShowChat(false);
-    setCloseStream(false);
-    setChannel("");
+    setInput("");
   }
 
   useEffect(() => {
-    if(submittedChannel && !closeStream){
-      document.title = `🔴 Watching ${submittedChannel} | Twitchy`;
+    if(channels.length > 0){
+      document.title = `🔴 Watching ${channels.join(" + ")} | Twitchy`;
     }
     else {
       document.title = `Twitchy | Stream Multiviewing`;
@@ -38,110 +50,100 @@ function App() {
   return (
     <div className="App">
       <h1 id="twitchy">Twitchy</h1>
+      <p>( Multiviewing made easy )</p>
       
       <form onSubmit={handleSubmit} className="searchbar">
 
-        <button type='button' className="switchPlatform" onClick={() => {
-          setPlatform((prev) => (prev === "twitch" ? "youtube" : "twitch")); setCloseStream(true); setShowChat(false) }
-        }>
-          {platform === "twitch" ? <FaTwitch size={24} color='purple'/> : <FaYoutube size={24} color='red'/>}
+        <button type='button' className={`switchPlatform ${platform}`}>
+          {platform === "twitch" ? <FaTwitch size={24}/> : <FaYoutube size={24}/>}
         </button>
         
         <input id="searchInput"
           type='text'
           placeholder='Enter channel name'
-          value={channel}
-          onChange={(e) => setChannel(e.target.value)}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
         />
-
-        {/* <input
-          type="text"
-          placeholder="Twitch Channel 2 (optional)"
-          value={channel2}
-          onChange={(e) => setChannel2(e.target.value)}
-        /> */}
 
         <button type='submit' id="searchButton">Search</button>
       </form>
 
 
-      {submittedChannel && !closeStream && platform === "twitch" && (
+      {channels.length > 0 && (
+        <>
         <div className="stream">
-          {submittedChannel && ( 
-            <iframe id="twitch-stream-embed"
-              src={`https://player.twitch.tv/?channel=${submittedChannel}&parent=${parentDomain}`}
-              height="550"
-              width="916"
-              allowfullscreen
-              title="Twitch Stream">
-            </iframe>
-          )}
-
-          {/* {submittedChannel2 && ( 
-            <iframe id="twitch-stream-embed"
-              src={`https://player.twitch.tv/?channel=${submittedChannel2}&parent=${parentDomain}`}
-              height="550"
-              width="916"
-              allowfullscreen
-              title="Twitch Stream">
-            </iframe>
-          )} */}
-
-          {showChat && !closeStream && (
-            <iframe id="twitch-chat-embed"
-              src={`https://www.twitch.tv/embed/${submittedChannel}/chat?parent=${parentDomain}`}
-              height="550"
+          {channels.map((channel, index) => 
+            visibleChannels[index] ? (
+            <iframe className='twitch-stream-embed'
+              key={index}
+              src={`https://player.twitch.tv/?channel=${channel}&parent=${parentDomain}`}
+              height={channels.length === 1 ? "530" : "400"}
+              width={channels.length === 1 ? "900" : "625"}
+              allowFullScreen
+              title={`Twitch Stream ${channel}`}
+            ></iframe>
+          ) : null
+        )}
+      
+        {showChat && visibleChannels.filter(Boolean).length === 1 && (() => {
+          const chatIndex = visibleChannels.findIndex(Boolean);
+          if (chatIndex === -1) return null;
+          return (
+            <iframe
+              id="twitch-chat-embed"
+              src={`https://www.twitch.tv/embed/${channels[chatIndex]}/chat?parent=${parentDomain}`}
+              height="530"
               width="350"
-              title="Twitch Chat">
-            </iframe>
-          )}
-        </div>
-      )}
-
-      {submittedChannel && !closeStream && platform === "youtube" && (
-        <div className="stream">
-          {/* <blockquote class="tiktok-embed" cite={`https://www.tiktok.com/@${submittedChannel}`} data-unique-id={submittedChannel} data-embed-type="creator" style="max-width: 780px; min-width: 288px;" > <section> <a target="_blank" href={`https://www.tiktok.com/@${submittedChannel}?refer=creator_embed`}>{`@${submittedChannel}`}</a> </section> </blockquote> <script async src="https://www.tiktok.com/embed.js"></script> */}
-
-          {/* {showChat && !closeStream && (
-            <iframe id="twitch-chat-embed"
-              src={`https://www.twitch.tv/embed/${submittedChannel}/chat?parent=${parentDomain}`}
-              height="550"
-              width="350"
-              title="Twitch Chat">
-            </iframe>
-          )} */}
-        </div>
-      )}
+              title={`Twitch Chat ${channels[chatIndex]}`}
+            ></iframe>
+          );
+        })()}
+      </div>
+      </>
+    )}
 
 
-      {submittedChannel && !closeStream && (
+      {visibleChannels.some(Boolean) && (
         <div className="buttonRow">
-          <button onClick={() => setShowChat(!showChat)}  className="toggleChatButton">
-            {showChat ? "Hide Chat" : "Show Chat" }
-          </button>
+          {visibleChannels.filter(Boolean).length === 1 && (
+            <button onClick={() => setShowChat(!showChat)}  className="toggleChatButton">
+              {showChat ? "Hide Chat" : "Show Chat" }
+            </button>
+          )}
 
-          <button onClick={() => { setCloseStream(true); setShowChat(false) }}  className="closeStreamButton">
-            Close
-          </button>
+          {channels.map((channel, index) =>
+          visibleChannels[index] ? (
+            <button
+              className="closeStreamButton"
+              key={`close-${index}`}
+              onClick={() => {
+                const updatedChannels = [...channels];
+                const updatedVisible = [...visibleChannels];
+                
+                updatedChannels.splice(index, 1);
+                updatedVisible.splice(index, 1);
+
+                setChannels(updatedChannels);
+                setVisibleChannels(updatedVisible);
+                setShowChat(false);
+                setNum(0);
+              }}
+            >
+              Close
+            </button>
+          ) : null
+        )}
 
         </div>
-
       )}
+
+      <div className="credits">
+        <a href="https://github.com/Iced-code/twitchy" target='_blank'>
+          Developed by Ayaan Modak (Github: Iced-Code)</a>
+      </div>
 
     </div>
   );
 }
 
 export default App
-
-{/* <iframe 
-        src="https://www.youtube.com/embed/PmEMEvstqJY?si=-l4IdXw5pg3yjl_x" 
-        height="480"
-        width="800"  
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        referrerpolicy="strict-origin-when-cross-origin" 
-        allowfullscreen>
-
-    </iframe> */}
