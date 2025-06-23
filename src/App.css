@@ -85,10 +85,10 @@ body #searchInput:-webkit-autofill {
   transition: background-color 9999s ease-in-out 0s;
 }
 
-body.light #searchInput:-webkit-autofill {
+body.light #searchInput, #searchInput:-webkit-autofill {
   -webkit-text-fill-color: #1e1e2f !important;
 }
-body.dark #searchInput:-webkit-autofill {
+body.dark #searchInput, #searchInput:-webkit-autofill {
   -webkit-text-fill-color: white !important;
 }
 
