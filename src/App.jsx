@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { FaTwitch, FaYoutube } from 'react-icons/fa'
+import { FaMoon, FaSun } from 'react-icons/fa'
 import './App.css'
 
 function App() {
@@ -7,9 +7,7 @@ function App() {
   const [channels, setChannels] = useState([]);
   const [showChat, setShowChat] = useState(false);
   const [visibleChannels, setVisibleChannels] = useState([]);
-
-  const [platform, setPlatform] = useState("twitch");
-
+  const [theme, setTheme] = useState("dark");
   const [num, setNum] = useState(0);
 
   const handleSubmit = (e) => {
@@ -43,19 +41,23 @@ function App() {
     else {
       document.title = `twitchy | Stream Multiviewing`;
     }
-  })
+
+    document.body.className = '';
+    document.body.classList.add(theme);
+  }, [channels, theme])
 
   const parentDomain = window.location.hostname;
 
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
       <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
       <p>( Multiviewing made easy )</p>
       
       <form onSubmit={handleSubmit} className="searchbar">
 
-        <button type='button' className={`switchPlatform ${platform}`}>
-          {platform === "twitch" ? <FaTwitch size={24}/> : <FaYoutube size={24}/>}
+        <button type="button" className={`themeButton ${theme}`} 
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+          {theme === "dark" ? <FaSun size={24}/> : <FaMoon size={24}/>}
         </button>
         
         <input id="searchInput"
@@ -139,7 +141,7 @@ function App() {
 
       <div className="credits">
         <a href="https://github.com/Iced-code/twitchy" target='_blank'>
-          Developed by Ayaan Modak (Github: Iced-Code)</a>
+          Developed by Ayaan Modak (<span style={{ textDecoration: "underline"}}>Github: Iced-Code</span>)</a>
       </div>
 
     </div>

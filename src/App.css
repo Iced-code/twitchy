@@ -9,8 +9,19 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #1e1e2f, #2a2a3d, #3b3b50);
   background-attachment: fixed;
-  color: #ffffff;
+  transition: 0.2s ease;
 }
+
+body.dark {
+  background: linear-gradient(135deg, #1e1e2f, #2a2a3d, #3b3b50);
+  color: white;
+}
+
+body.light {
+  background: linear-gradient(135deg, #f4f0fa, #e6e2f3, #d9d2ec);
+  color: #1e1e2f;
+}
+
 
  .App {
   display: flex;
@@ -34,7 +45,7 @@ p {
   font-size: 20px;
 }
 
-.switchPlatform {
+.themeButton {
   border: none;
   border-radius: 6px;
   padding: 1rem;
@@ -44,17 +55,11 @@ p {
   justify-content: center;
   color: white;
   transition: background-color 0.2s ease;
-}
-
-.switchPlatform:hover {
-  background-color: #979797;
-}
-
-.switchPlatform.twitch {
   background-color: purple;
 }
-.switchPlatform.youtube {
-  background-color: red;
+
+.themeButton:hover {
+  background-color: rgb(231, 108, 231);
 }
 
 .searchbar {
@@ -66,13 +71,25 @@ p {
 #searchInput {
   padding: 1rem 1.3rem;
   font-size: 1rem;
-  background: #2a2a3d;
-  color: white;
   border: 1px solid #8a2be2;
-  
   width: 20vw;
   min-width: 200px;
   max-width: 400px;
+
+  background-color: transparent;
+}
+
+body #searchInput:-webkit-autofill {
+  border: 1px solid #8a2be2;
+  background-color: transparent;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+body.light #searchInput:-webkit-autofill {
+  -webkit-text-fill-color: #1e1e2f !important;
+}
+body.dark #searchInput:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
 }
 
 #searchButton {
@@ -134,10 +151,9 @@ button, input {
   transition: 0.2s ease;
 }
 #searchButton:hover {
-  color: black;
-  background-color: #77777a;
+  color: white;
+  background-color: #3e3e3e;
 }
-
 
 .credits a {
   position: fixed;
@@ -149,6 +165,16 @@ button, input {
   z-index: 100;
 }
 
-.credits a:hover {
-  color: #888;
+body.light .credits a {
+  color: #444;
 }
+body.dark .credits a {
+  color: #bbb;
+}
+
+body .credits a:hover {
+  color: #999;
+}
+
+
+
