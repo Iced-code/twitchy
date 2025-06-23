@@ -38,10 +38,10 @@ function App() {
 
   useEffect(() => {
     if(channels.length > 0){
-      document.title = `🔴 Watching ${channels.join(" + ")} | Twitchy`;
+      document.title = `🔴 Watching ${channels.join(" + ")} | twitchy`;
     }
     else {
-      document.title = `Twitchy | Stream Multiviewing`;
+      document.title = `twitchy | Stream Multiviewing`;
     }
   })
 
