@@ -75,7 +75,7 @@ body.dark .themeButton:hover {
 .searchbar {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 #searchInput {
@@ -109,7 +109,8 @@ body.dark #searchInput, #searchInput:-webkit-autofill {
 
 .stream {
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
+
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -118,11 +119,14 @@ body.dark #searchInput, #searchInput:-webkit-autofill {
   border-radius: 1rem;
   backdrop-filter: blur(10px);
   
-  padding: 2rem 2rem;
+  padding: 1rem 1rem;
+}
+
+body.dark .stream {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .stream iframe {
-  transform: scale(1.1);
   margin: 1rem;
 }
 

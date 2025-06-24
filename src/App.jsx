@@ -41,7 +41,7 @@ function App() {
       document.title = `🔴 Watching ${channels.join(" + ")} | twitchy`;
     }
     else {
-      document.title = `🔴 Watching ${channels[0]} & ${channels.length-1} more | twitchy`;
+      document.title = `🔴 Watching ${channels[0]} & ${channels.length-1} others | twitchy`;
     }
 
     document.body.className = '';
@@ -82,14 +82,14 @@ function App() {
               key={index}
               src={`https://player.twitch.tv/?channel=${channel}&parent=${parentDomain}`}
               height={
-                channels.length === 1 ? "480" :
-                channels.length >= 2 ? "380" :
-                "350"
+                channels.length === 1 ? "528" :
+                channels.length <= 4 ? "418" :
+                "385"
               }
               width={
-                channels.length === 1 ? "850" :
-                channels.length >= 2 ? "625" :
-                "450"
+                channels.length === 1 ? "935" :
+                channels.length <= 4 ? "688" :
+                "495"
               }
 
               allowFullScreen
@@ -105,7 +105,7 @@ function App() {
             <iframe
               id="twitch-chat-embed"
               src={`https://www.twitch.tv/embed/${channels[chatIndex]}/chat?parent=${parentDomain}`}
-              height="530"
+              height="528"
               width="350"
               title={`Twitch Chat ${channels[chatIndex]}`}
             ></iframe>
@@ -114,7 +114,6 @@ function App() {
       </div>
       </>
     )}
-
 
       {visibleChannels.some(Boolean) && (
         <div className="buttonRow">
