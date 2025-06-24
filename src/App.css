@@ -55,11 +55,21 @@ p {
   justify-content: center;
   color: white;
   transition: background-color 0.2s ease;
-  background-color: purple;
 }
 
-.themeButton:hover {
+body.light .themeButton {
+  background-color: purple;
+}
+body.light .themeButton:hover {
   background-color: rgb(231, 108, 231);
+}
+
+body.dark .themeButton {
+  background-color: rgb(231, 108, 231);
+}
+
+body.dark .themeButton:hover {
+  background-color: purple;
 }
 
 .searchbar {
@@ -107,6 +117,8 @@ body.dark #searchInput, #searchInput:-webkit-autofill {
   background: rgba(255, 255, 255, 0.05); 
   border-radius: 1rem;
   backdrop-filter: blur(10px);
+  
+  padding: 2rem 2rem;
 }
 
 .stream iframe {
@@ -140,6 +152,8 @@ button, input {
   cursor: pointer;
   background-color: #8a2be2;
   transition: background-color 0.2s ease;
+
+  margin-bottom: 2rem;
 }
 
 .toggleChatButton:hover,

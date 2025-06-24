@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
+import { IoMdRemoveCircle } from "react-icons/io";
+
+
 import './App.css'
 
 function App() {
@@ -18,15 +21,11 @@ function App() {
         setChannels([input]);
         setVisibleChannels([true]);
       }
-      else if(channels.length > 0 && input !== channels[0]){
-        if(channels.length > 1 && input !== channels[1]){
-          num === 0 ? setChannels([input, channels[1]]) : setChannels([channels[0], input]);
-          setNum(Math.abs(num + -1));
-        }
-        else {
-          setChannels([channels[0], input]);
-        }
-        setVisibleChannels([true, true]);
+      else if(channels.length > 0 && !channels.includes(input) && channels.length < 4){
+        const updatedChannels = [...channels, input];
+        const updatedVisible = [...visibleChannels, true];
+        setChannels(updatedChannels);
+        setVisibleChannels(updatedVisible);
       }
     } 
 
@@ -35,11 +34,14 @@ function App() {
   }
 
   useEffect(() => {
-    if(channels.length > 0){
+    if(channels.length === 0){
+      document.title = `twitchy | Stream Multiviewing`;
+    }
+    else if(channels.length <= 2){
       document.title = `🔴 Watching ${channels.join(" + ")} | twitchy`;
     }
     else {
-      document.title = `twitchy | Stream Multiviewing`;
+      document.title = `🔴 Watching ${channels[0]} & ${channels.length-1} more | twitchy`;
     }
 
     document.body.className = '';
@@ -79,8 +81,17 @@ function App() {
             <iframe className='twitch-stream-embed'
               key={index}
               src={`https://player.twitch.tv/?channel=${channel}&parent=${parentDomain}`}
-              height={channels.length === 1 ? "530" : "400"}
-              width={channels.length === 1 ? "900" : "625"}
+              height={
+                channels.length === 1 ? "480" :
+                channels.length >= 2 ? "380" :
+                "350"
+              }
+              width={
+                channels.length === 1 ? "850" :
+                channels.length >= 2 ? "625" :
+                "450"
+              }
+
               allowFullScreen
               title={`Twitch Stream ${channel}`}
             ></iframe>
@@ -131,7 +142,7 @@ function App() {
                 setNum(0);
               }}
             >
-              Close
+              <IoMdRemoveCircle size={12}/> {`${channels.length === 1 ? "Close" : channels[index]}`}
             </button>
           ) : null
         )}
