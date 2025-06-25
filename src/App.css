@@ -10,6 +10,7 @@ body {
   background: linear-gradient(135deg, #1e1e2f, #2a2a3d, #3b3b50);
   background-attachment: fixed;
   transition: 0.2s ease;
+  background: linear-gradient(135deg, #1e1e2f, #2a2a3d, #3b3b50);
 }
 
 body.dark {
@@ -95,11 +96,24 @@ body #searchInput:-webkit-autofill {
   transition: background-color 9999s ease-in-out 0s;
 }
 
-body.light #searchInput, #searchInput:-webkit-autofill {
+body.light #searchInput, body.light #searchInput:-webkit-autofill {
   -webkit-text-fill-color: #1e1e2f !important;
 }
-body.dark #searchInput, #searchInput:-webkit-autofill {
+body.dark #searchInput, body.dark #searchInput:-webkit-autofill {
   -webkit-text-fill-color: white !important;
+}
+
+#searchInput:focus {
+  outline: 2px solid #8a2be2;
+}
+
+body.dark #searchInput::placeholder {
+  -webkit-text-fill-color: #b9b9d6;
+  color: #b9b9d6;
+}
+body.light #searchInput::placeholder {
+  -webkit-text-fill-color: #6c6ca8;
+  color: #6c6ca8;
 }
 
 #searchButton {
