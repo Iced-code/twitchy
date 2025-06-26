@@ -55,7 +55,7 @@ function App() {
 
       <div className='title'>
         <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
-        <img src="./public/twitchy_apple_icon.png"></img>
+        <img src="./assets/twitchy_apple_icon.png"></img>
       </div>
       <p>( Multiviewing made easy )</p>
       
