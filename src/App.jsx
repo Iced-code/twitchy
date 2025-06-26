@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { IoMdRemoveCircle } from "react-icons/io";
 
-
 import './App.css'
+import logo from './assets/twitchy_apple_icon.png'
 
 function App() {
   const [input, setInput] = useState("");
@@ -55,7 +55,7 @@ function App() {
 
       <div className='title'>
         <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
-        <img src="./assets/twitchy_apple_icon.png"></img>
+        <img src={logo}></img>
       </div>
       <p>( Multiviewing made easy )</p>
       
