@@ -52,8 +52,13 @@ function App() {
 
   return (
     <div className={`App ${theme}`}>
-      <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
+
+      <div className='title'>
+        <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
+        <img src="./public/twitchy_apple_icon.png"></img>
+      </div>
       <p>( Multiviewing made easy )</p>
+      
       
       <form onSubmit={handleSubmit} className="searchbar">
 
