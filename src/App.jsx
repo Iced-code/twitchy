@@ -13,6 +13,7 @@ function App() {
   const [theme, setTheme] = useState("dark");
   const [num, setNum] = useState(0);
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -54,8 +55,8 @@ function App() {
     <div className={`App ${theme}`}>
 
       <div className='title'>
-        <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
         <img src={logo}></img>
+        <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
       </div>
       <p>( Multiviewing made easy )</p>
       
@@ -143,7 +144,6 @@ function App() {
                 setChannels(updatedChannels);
                 setVisibleChannels(updatedVisible);
                 setShowChat(false);
-                setNum(0);
               }}
             >
               <IoMdRemoveCircle size={12}/> {`${channels.length === 1 ? "Close" : channels[index]}`}
