@@ -55,8 +55,8 @@ function App() {
     <div className={`App ${theme}`}>
 
       <div className='title'>
-        <img src={logo}></img>
         <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
+        <img src={logo}></img>
       </div>
       <p>( Multiviewing made easy )</p>
       
