@@ -3,7 +3,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import { IoMdRemoveCircle } from "react-icons/io";
 
 import './App.css'
-import logo from './assets/twitchy_apple_icon.png'
+import logo from './assets/twitchy_large_icon.png'
 
 function App() {
   const [input, setInput] = useState("");
