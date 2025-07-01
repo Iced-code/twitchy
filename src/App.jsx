@@ -8,12 +8,19 @@ import logo from './assets/twitchy_large_icon.png'
 function App() {
   const [input, setInput] = useState("");
   const [channels, setChannels] = useState([]);
-  const [showChat, setShowChat] = useState(false);
   const [visibleChannels, setVisibleChannels] = useState([]);
+  const [lastChannels, setLastChannels] = useState([]);
+  const [showChat, setShowChat] = useState(false);
   const [theme, setTheme] = useState("dark");
 
   const loadLast = () => {
-    let lastChannels = JSON.parse(localStorage.getItem('lastWatchedChannels')) || [];
+    if(lastChannels.length > 0){
+      setChannels(lastChannels);
+
+      const vis = new Array(lastChannels.length).fill(true);
+      setVisibleChannels(vis);
+    }
+    /* let lastChannels = JSON.parse(localStorage.getItem('lastWatchedChannels')) || [];
     
     if(lastChannels.length > 0) {
       setChannels(lastChannels);
@@ -22,7 +29,7 @@ function App() {
       setVisibleChannels(vis);
 
       localStorage.setItem('lastWatchedChannels', []);
-    }
+    } */
   }
 
   const handleSubmit = (e) => {
@@ -43,7 +50,8 @@ function App() {
 
       setChannels(updatedChannels);
       setVisibleChannels(updatedVisible);
-      localStorage.setItem('lastWatchedChannels', JSON.stringify(updatedChannels));
+      // localStorage.setItem('lastWatchedChannels', JSON.stringify(updatedChannels));
+      setLastChannels(updatedChannels);
     } 
 
     setShowChat(false);
@@ -101,12 +109,12 @@ function App() {
           onChange={(e) => setInput(e.target.value)}
         />
 
-        <button type='submit' id="searchButton">Search</button>
+        <button type='submit' className="genButton">Search</button>
       </form>
 
-      {channels.length === 0 && (
+      {channels.length === 0 && lastChannels.length > 0 && (
         <>
-          <button type="button" onClick={loadLast} id="loadButton">
+          <button type="button" onClick={loadLast} className="genButton">
             {`Load last watched`}
           </button>
         </>
