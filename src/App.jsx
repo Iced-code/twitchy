@@ -11,23 +11,39 @@ function App() {
   const [showChat, setShowChat] = useState(false);
   const [visibleChannels, setVisibleChannels] = useState([]);
   const [theme, setTheme] = useState("dark");
-  const [num, setNum] = useState(0);
 
+  const loadLast = () => {
+    let lastChannels = JSON.parse(localStorage.getItem('lastWatchedChannels')) || [];
+    
+    if(lastChannels.length > 0) {
+      setChannels(lastChannels);
+
+      const vis = new Array(lastChannels.length).fill(true);
+      setVisibleChannels(vis);
+
+      localStorage.setItem('lastWatchedChannels', []);
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if(input.trim() !== ""){
+      let updatedChannels = [...channels];
+      let updatedVisible = [...visibleChannels];
+
       if(channels.length === 0){
-        setChannels([input]);
-        setVisibleChannels([true]);
+        updatedChannels = [input];
+        updatedVisible = [true];
       }
       else if(channels.length > 0 && !channels.includes(input) && channels.length < 4){
-        const updatedChannels = [...channels, input];
-        const updatedVisible = [...visibleChannels, true];
-        setChannels(updatedChannels);
-        setVisibleChannels(updatedVisible);
+        updatedChannels.push(input);
+        updatedVisible.push(true);
       }
+
+      setChannels(updatedChannels);
+      setVisibleChannels(updatedVisible);
+      localStorage.setItem('lastWatchedChannels', JSON.stringify(updatedChannels));
     } 
 
     setShowChat(false);
@@ -42,7 +58,7 @@ function App() {
         if (data.live) {
           alert(`${data.stream_data.user_name} is live`);
         }
-      }); */
+    }); */
 
 
     if(channels.length === 0){
@@ -88,6 +104,13 @@ function App() {
         <button type='submit' id="searchButton">Search</button>
       </form>
 
+      {channels.length === 0 && (
+        <>
+          <button type="button" onClick={loadLast} id="loadButton">
+            {`Load last watched`}
+          </button>
+        </>
+      )}
 
       {channels.length > 0 && (
         <>

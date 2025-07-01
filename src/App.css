@@ -133,9 +133,14 @@ body.light #searchInput::placeholder {
   color: #6c6ca8;
 }
 
-#searchButton {
+#searchButton, #loadButton {
   padding: 1rem 1rem;
   font-size: 1rem;
+  transition: 0.2s ease;
+}
+#searchButton:hover, #loadButton:hover {
+  color: white;
+  background-color: #3e3e3e;
 }
 
 .stream {
@@ -195,15 +200,6 @@ button, input {
 .closeStreamButton:hover {
   background-color: #6c1bbd;
 }
-
-#searchButton {
-  transition: 0.2s ease;
-}
-#searchButton:hover {
-  color: white;
-  background-color: #3e3e3e;
-}
-
 
 .credits a {
   position: fixed;
