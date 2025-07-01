@@ -135,9 +135,9 @@ body.light #searchInput::placeholder {
   padding: 1rem 1rem;
   font-size: 1rem;
   transition: 0.2s ease;
+  color: white;
 }
 .genButton:hover {
-  color: white;
   text-decoration: none;
   background-color: #3e3e3e;
 }
