@@ -35,6 +35,16 @@ function App() {
   }
 
   useEffect(() => {
+
+    /* fetch(`http://localhost:5000/api/is_live?username=${channels[0] }`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.live) {
+          alert(`${data.stream_data.user_name} is live`);
+        }
+      }); */
+
+
     if(channels.length === 0){
       document.title = `twitchy | Stream Multiviewing`;
     }
