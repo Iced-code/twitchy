@@ -106,7 +106,7 @@ function App() {
           type='text'
           placeholder='Enter channel name'
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => setInput(e.target.value.trim())}
         />
 
         <button type='submit' className="genButton">Search</button>
