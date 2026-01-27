@@ -86,7 +86,7 @@ function App() {
   const parentDomain = window.location.hostname;
 
   return (
-    <div className={`App ${theme}`}>
+    <div className={`App ${theme} scrollbar-hide`}>
 
       <div className='title'>
         <h1 id="twitchy">twitch<span className='purple-y'>y</span></h1>
