@@ -36,6 +36,15 @@ function App() {
     e.preventDefault();
 
     if(input.trim() !== ""){
+      /* fetch(`http://localhost:5000/is_live/${channels[0] }`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.live) {
+            alert(`${data.stream_data.user_name} is live`);
+          }
+      }); */
+
+
       let updatedChannels = [...channels];
       let updatedVisible = [...visibleChannels];
 

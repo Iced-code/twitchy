@@ -75,6 +75,29 @@ def get_live_stream(username):
     data = r.json()["data"]
     return data
 
+@app.route("/is_live/<username>")
+def is_Live(username):
+    r = requests.get(
+        f"{API_BASE}/search/channels",
+        headers=twitch_headers(),
+        params={
+            "query": username,
+        }
+    )
+
+    output = dict()
+    output["channel_name"] = username
+    output["is_live"] = False
+
+    data = r.json()["data"]
+    for item in data:
+        if item["display_name"] == username or item["broadcaster_login"] == username:
+            output["is_live"] = bool(item["is_live"])
+            break
+
+    return jsonify(output)
+
+
 @app.route("/users/<username>")
 def get_streamer(username):
     r = requests.get(
